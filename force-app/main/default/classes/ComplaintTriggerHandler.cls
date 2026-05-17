@@ -64,4 +64,24 @@ public with sharing class ComplaintTriggerHandler {
             }
         }
     }
+
+    public static void handleEscalation(
+            List<Complaint__c> newList,
+            Map<Id,Complaint__c> oldMap 
+        ){
+            List<Id> escalatedComplaintIds = new List<Id>();
+            
+            for(Complaint__c comp: newList){
+
+                Complaint__c oldComp = oldMap.get(comp.Id);
+
+                if(comp.Status__c == 'Escalated' && oldComp.Status__c != 'Escalated'){
+                    escalatedComplaintIds.add(comp.Id);
+                }
+            }
+            
+            if(!escalatedComplaintIds.isEmpty()){
+                ComplaintAsyncService.sendEscalationEmail(escalatedComplaintIds);
+            }
+        }
 }
