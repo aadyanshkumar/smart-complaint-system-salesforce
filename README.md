@@ -188,7 +188,7 @@ Stores complaint information.
 ## Clone Repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_LINK
+git clone https://github.com/aadyanshkumar/smart-complaint-system-salesforce
 ```
 
 ---
